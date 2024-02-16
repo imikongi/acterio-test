@@ -1,0 +1,44 @@
+.card {
+    position: relative;
+    font-size: 12px;
+    overflow: hidden;
+    height: 149px;
+    transition: max-height 0.3s ease;
+}
+
+.fadeTextOverlay {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: 9%;
+    background: linear-gradient(90deg, rgba(255,255,255,0.5545510684742647) 14%, rgba(255,255,255,0.8766799200148809) 48%, rgba(255,255,255,1) 75%);
+    pointer-events: none;
+    transition: background 0.3s ease
+}
+
+.cardActions {
+    margin-top: auto;
+}
+
+.card:hover .spy{
+    opacity: 1;
+}
+
+.spy {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #34C924;
+    height: 100%;
+    opacity: 0;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease-in-out, background-color 0.5s ease;
+}
+
+.spy:hover {
+    background-color: #2a941b;
+}

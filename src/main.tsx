@@ -6,11 +6,13 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Posts from "./pages/Posts/Posts.tsx";
 import {setupStore} from "./store/store.ts";
 import {Provider} from "react-redux";
+import ErrorPage from "./pages/Error/ErrorPage.tsx";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element:  <Home />
+        element:  <Home />,
+        errorElement: <ErrorPage/>
     },
     {
         path: '/posts',

@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {getAllPosts} from "./postsThunk.ts";
+import {IPost} from "../../models/IPost.ts";
 
 interface PostsState {
 	posts: IPost[],
