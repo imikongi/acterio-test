@@ -22,7 +22,7 @@ const Search = () => {
 		return () => {
 			debouncedQueryUpdate.cancel();
 		};
-	}, []);
+	}, [debouncedQueryUpdate]);
 
 	return (
 		<div style={{width:500}}>

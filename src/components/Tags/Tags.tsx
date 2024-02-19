@@ -8,7 +8,7 @@ type TagsProps = {
 	detailedView: boolean
 }
 
-const Tags: React.FC<TagsProps> = ({tags, detailedView}) => {
+const Tags: React.FC<TagsProps> = ({tags}) => {
 	const dispatch = useAppDispatch()
 	const {chosenTags} = useAppSelector(state => state.postsSlice)
 
