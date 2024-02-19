@@ -7,24 +7,25 @@ import MyCard from "../../components/Card/MyCard.tsx";
 import Search from "../../components/Search/Search.tsx";
 import styles from './Posts.module.css'
 import {Link} from "react-router-dom";
-import {filteredPostsSelector} from "../../store/reducers/postsSlice.ts";
+import {combinedSelector} from "../../store/reducers/selectors/combinedSelector.ts";
 
 
 const Posts = () => {
 	const dispatch = useAppDispatch()
 	const {isLoading, error} = useAppSelector(state => state.postsSlice)
-	const filteredPosts = useAppSelector(filteredPostsSelector)
+	const filteredAndSearchedPosts = useAppSelector(combinedSelector)
+
 
 	useEffect(() => {
 		dispatch(getAllPosts())
 	}, [dispatch]);
 
 	if (error) {
-		return <div>{error}</div>;
+		return <div className={styles.centralizer}>{error}</div>;
 	}
 
 	if (isLoading && !error) {
-		return <CircularProgress/>;
+		return <div className={styles.centralizer}><CircularProgress/></div>;
 	}
 
 	return (
@@ -37,9 +38,9 @@ const Posts = () => {
 			</div>
 
 			<Grid container spacing={2} alignItems='start'>
-				{filteredPosts && filteredPosts.map((post) => {
+				{filteredAndSearchedPosts && filteredAndSearchedPosts.map((post) => {
 					return (
-						<Grid item xs={12} sm={6} md={4}>
+						<Grid key={post.id} item xs={12} sm={6} md={4}>
 							<MyCard post={post}/>
 						</Grid>
 					)
