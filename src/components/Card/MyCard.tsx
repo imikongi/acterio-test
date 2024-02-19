@@ -4,10 +4,12 @@ import {IPost} from "../../models/IPost.ts";
 import Tags from "../Tags/Tags.tsx";
 import styles from './MyCards.module.css'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import CloseIcon from '@mui/icons-material/Close';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Link} from "react-router-dom";
 import {useAppDispatch} from "../../hooks/redux.ts";
-import {addRemoveLike, checkLocal} from "../../store/reducers/post/postSlice.ts";
+import {addRemoveLike, applyLocal} from "../../store/reducers/post/postSlice.ts";
+import {removePost} from "../../store/reducers/posts/postsSlice.ts";
 
 type MyCardProps = {
 	post: IPost
@@ -18,35 +20,35 @@ export const MyCard: React.FC<MyCardProps> = ({post, detailedView}) => {
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
+		//checking for saved data in localStorage
 		const savedData = JSON.parse(localStorage.getItem(`likedPost_${post.id}`) || '{}')
-		if(savedData){
-			dispatch(checkLocal({
+		if (savedData) {
+			dispatch(applyLocal({
 				isLiked: savedData.isLiked || false,
 				reactions: savedData.reactions || post.reactions
 			}))
 		}
-		
+
 	}, [dispatch, post.id, post.reactions]);
-	
+
 	const handleLike = () => {
 		dispatch(addRemoveLike())
+	}
+
+	const handleRemove = (id: number) => {
+		dispatch(removePost(id))
 	}
 
 	return (
 		<div>
 			<Card className={detailedView ? styles.cardBig : styles.cardSmall}>
 				<CardHeader
-					avatar={
-						<Avatar
-							src={`/assets/${post.userId}.png`}
-						/>
-						}
+					avatar={<Avatar src={`/assets/${post.userId}.png`}/>}
 					title={<Typography
 						style={{width: 250, textAlign: 'left'}}
-						variant={`${detailedView ? 'body2' : 'subtitle2'}`}
-					>
+						variant={`${detailedView ? 'body2' : 'subtitle2'}`}>
 						{post.title}
-					</Typography>}
+						</Typography>}
 					subheaderTypographyProps={{align: 'left'}}
 					subheader={<Tags tags={post.tags} detailedView={detailedView}/>}
 				/>
@@ -56,16 +58,14 @@ export const MyCard: React.FC<MyCardProps> = ({post, detailedView}) => {
 					</Typography>
 					<div
 						className={styles.fadeTextOverlay}
-						style={{}}
-					>
-
+						style={{paddingBottom: 5}}>
 					</div>
 				</CardContent>
-
+				{/*showing like functionality in detailed view*/}
 				{detailedView
-					? <CardActions disableSpacing sx={{paddingLeft:2}}>
+					? <CardActions disableSpacing sx={{paddingLeft: 2}}>
 						<Typography>
-							{JSON.parse(localStorage.getItem(`likedPost_${post.id}`)|| '{}').reactions || post.reactions}
+							{JSON.parse(localStorage.getItem(`likedPost_${post.id}`) || '{}').reactions || post.reactions}
 						</Typography>
 						<IconButton onClick={handleLike}>
 							<FavoriteIcon/>
@@ -74,16 +74,16 @@ export const MyCard: React.FC<MyCardProps> = ({post, detailedView}) => {
 					: ''
 				}
 
-				<Link to={`${post.id}`}>
-					<div className={styles.spy}>
-						<ArrowForwardIcon style={{color: 'white'}}/>
+				<div className={styles.spy}>
+					<div className={styles.cross} onClick={() => handleRemove(post.id)}>
+						<CloseIcon style={{color: 'white'}}/>
 					</div>
-				</Link>
+					<Link to={`${post.id}`} className={styles.arrow}>
+						<ArrowForwardIcon style={{color: 'white'}}/>
+					</Link>
+				</div>
 			</Card>
-
-
 		</div>
-		//
 	);
 };
 

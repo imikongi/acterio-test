@@ -7,7 +7,7 @@ import { debounce } from 'lodash';
 const Search = () => {
 	const dispatch = useAppDispatch()
 	const [query, setQuery] = useState('')
-
+	//debounce for better performance
 	const debouncedQueryUpdate = debounce((value: string) => {
 		dispatch(queryChanging(value))
 	}, 300)
@@ -22,7 +22,7 @@ const Search = () => {
 		return () => {
 			debouncedQueryUpdate.cancel();
 		};
-	}, [debouncedQueryUpdate]);
+	}, []);
 
 	return (
 		<div style={{width:500}}>

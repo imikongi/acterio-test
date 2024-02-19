@@ -32,7 +32,9 @@ const postsSlice = createSlice({
 				state.chosenTags = state.chosenTags.filter(tag => tag !== action.payload)
 			}
 		},
-
+		removePost(state, action) {
+			state.posts = state.posts.filter(post => post.id != action.payload)
+		}
 	},
 	extraReducers: (builder) => {
 		builder
@@ -51,6 +53,6 @@ const postsSlice = createSlice({
 	}
 })
 
-export const {queryChanging, addRemoveTag} = postsSlice.actions
+export const {queryChanging, addRemoveTag, removePost} = postsSlice.actions
 
 export default postsSlice.reducer

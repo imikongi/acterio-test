@@ -20,7 +20,8 @@ const postSlice = createSlice({
 	name: 'post',
 	initialState,
 	reducers: {
-		checkLocal(state, action){
+		//apply data from localStorage
+		applyLocal(state, action){
 			const {isLiked, reactions} = action.payload
 			state.isLiked = isLiked
 			if (state.selectedPost) {
@@ -57,6 +58,6 @@ const postSlice = createSlice({
 	}
 })
 
-export const {addRemoveLike, checkLocal} = postSlice.actions
+export const {addRemoveLike, applyLocal} = postSlice.actions
 
 export default postSlice.reducer

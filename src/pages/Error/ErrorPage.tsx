@@ -3,7 +3,7 @@ import {useRouteError, isRouteErrorResponse, Link} from "react-router-dom";
 const ErrorPage= () => {
 	const error = useRouteError()
 	let errorMessage: string
-
+	//handle different error types
 	if(isRouteErrorResponse(error)){
 		errorMessage = error.data.message || error.statusText
 	} else if(error instanceof Error){
@@ -18,11 +18,10 @@ const ErrorPage= () => {
 	return (
 		<div>
 			<div>
-				<p>Oppsy, but some error occur:</p>
+				<p>Oopsy, but some error occur:</p>
 
 				<p>{errorMessage}</p>
 			</div>
-
 
 			<Link to={'/'}>
 				Back home

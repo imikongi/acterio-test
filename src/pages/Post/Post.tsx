@@ -7,7 +7,6 @@ import styles from './Post.module.css'
 import {getSelectedPost} from "../../store/reducers/post/postThunk.ts";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-
 const Post = () => {
 	const {postId} = useParams()
 	const dispatch = useAppDispatch()
@@ -22,7 +21,7 @@ const Post = () => {
 	if(!selectedPost){
 		return <CircularProgress/>
 	}
-	
+
 	return (
 		<div className={styles.wrapper}>
 			<Link to={'/posts'}>
