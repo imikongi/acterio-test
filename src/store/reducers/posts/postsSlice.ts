@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {getAllPosts} from "./postsThunk.ts";
-import {IPost} from "../../models/IPost.ts";
+import {IPost} from "../../../models/IPost.ts";
 
 interface PostsState {
 	posts: IPost[],
@@ -15,23 +15,24 @@ const initialState: PostsState = {
 	isLoading: false,
 	error: '',
 	searchQuery: '',
-	chosenTags: []
+	chosenTags: [],
 }
 
 const postsSlice = createSlice({
-	name: 'post',
+	name: 'posts',
 	initialState,
 	reducers: {
-		queryChanging(state, action){
+		queryChanging(state, action) {
 			state.searchQuery = action.payload
 		},
-		addRemoveTag(state, action){
-			if(!state.chosenTags.includes(action.payload)){
+		addRemoveTag(state, action) {
+			if (!state.chosenTags.includes(action.payload)) {
 				state.chosenTags.push(action.payload)
 			} else {
 				state.chosenTags = state.chosenTags.filter(tag => tag !== action.payload)
 			}
-		}
+		},
+
 	},
 	extraReducers: (builder) => {
 		builder
@@ -49,8 +50,6 @@ const postsSlice = createSlice({
 			})
 	}
 })
-
-
 
 export const {queryChanging, addRemoveTag} = postsSlice.actions
 

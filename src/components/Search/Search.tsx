@@ -1,6 +1,6 @@
 import {TextField} from "@mui/material";
 import {useAppDispatch} from "../../hooks/redux.ts";
-import {queryChanging} from "../../store/reducers/postsSlice.ts";
+import {queryChanging} from "../../store/reducers/posts/postsSlice.ts";
 import React, {useEffect, useState} from "react";
 import { debounce } from 'lodash';
 

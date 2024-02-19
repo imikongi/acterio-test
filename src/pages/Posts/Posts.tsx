@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux.ts";
-import {getAllPosts} from "../../store/reducers/postsThunk.ts";
+import {getAllPosts} from "../../store/reducers/posts/postsThunk.ts";
 import {CircularProgress, Grid} from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import MyCard from "../../components/Card/MyCard.tsx";
@@ -41,7 +41,7 @@ const Posts = () => {
 				{filteredAndSearchedPosts && filteredAndSearchedPosts.map((post) => {
 					return (
 						<Grid key={post.id} item xs={12} sm={6} md={4}>
-							<MyCard post={post}/>
+							<MyCard post={post} detailedView={false}/>
 						</Grid>
 					)
 				})}

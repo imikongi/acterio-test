@@ -7,6 +7,7 @@ import Posts from "./pages/Posts/Posts.tsx";
 import {setupStore} from "./store/store.ts";
 import {Provider} from "react-redux";
 import ErrorPage from "./pages/Error/ErrorPage.tsx";
+import Post from "./pages/Post/Post.tsx";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
     {
         path: '/posts',
         element: <Posts />
+    },
+    {
+        path: '/posts/:postId',
+        element: <Post/>
     }
 ])
 

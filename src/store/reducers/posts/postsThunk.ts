@@ -8,3 +8,4 @@ export const getAllPosts = createAsyncThunk(
 		return response.data.posts
 	}
 )
+

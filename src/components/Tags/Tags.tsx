@@ -1,13 +1,14 @@
 import {Chip} from "@mui/material";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux.ts";
-import {addRemoveTag} from "../../store/reducers/postsSlice.ts";
+import {addRemoveTag} from "../../store/reducers/posts/postsSlice.ts";
 
 type TagsProps = {
 	tags: string[]
+	detailedView: boolean
 }
 
-const Tags: React.FC<TagsProps> = ({tags}) => {
+const Tags: React.FC<TagsProps> = ({tags, detailedView}) => {
 	const dispatch = useAppDispatch()
 	const {chosenTags} = useAppSelector(state => state.postsSlice)
 
